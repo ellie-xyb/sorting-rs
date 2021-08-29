@@ -1,5 +1,25 @@
 pub fn sort(data: &mut Vec<u32>) {
-    println!("hi");
+    // let mut tmp = vec![0u32; data.len()];
+    let mut tmp: Vec<Vec<u32>> = Vec::new();
+
+    tmp.resize_with(256, || Vec::new());
+    // for _ in 0..256 {
+    //     tmp.push(Vec::new());
+    // }
+
+    for byte in 0..4 {
+        for value in data.iter() {
+            let b = value.to_le_bytes()[byte];
+
+            tmp[b as usize].push(*value);
+        }
+
+        *data = tmp.iter().flatten().map(|v| *v).collect();
+
+        for b in 0..256 {
+            tmp[b].clear();
+        }
+    }
 }
 
 #[cfg(test)]
