@@ -25,6 +25,8 @@ pub fn sort(data: &mut Vec<u32>) {
 #[cfg(test)]
 mod tests {
     use crate::sort;
+    use std::time::Instant;
+
     fn get_data() -> Vec<u32> {
         let mut data: Vec<u32> = Vec::new();
         for i in 0..1_000_000u32{
@@ -39,8 +41,13 @@ mod tests {
         let mut data_copy = data.clone();
         assert_eq!(data, data_copy);
 
+        let sort_time_1 = Instant::now();
         sort(&mut data);
+        println!("sort time 1 : {}", sort_time_1.elapsed().as_micros());
+        
+        let sort_time_2 = Instant::now();
         data_copy.sort();
+        println!("sort time 2 : {}", sort_time_2.elapsed().as_micros());
 
         assert_eq!(data, data_copy);
     }
