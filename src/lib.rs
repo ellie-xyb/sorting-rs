@@ -25,13 +25,13 @@ pub fn sort(data: &mut Vec<u32>) {
 #[cfg(test)]
 mod tests {
     use crate::sort;
-    use std::time::Instant;
     use rand::{thread_rng, RngCore};
+    use std::time::Instant;
 
     fn get_data() -> Vec<u32> {
         let mut data: Vec<u32> = Vec::new();
         let mut rng = thread_rng();
-        for _ in 0..1_000_000u32{
+        for _ in 0..1_000_000u32 {
             data.push(rng.next_u32());
         }
         // data.reverse();
@@ -46,7 +46,7 @@ mod tests {
         let sort_time_1 = Instant::now();
         sort(&mut data);
         println!("sort time 1 : {}", sort_time_1.elapsed().as_micros());
-        
+
         let sort_time_2 = Instant::now();
         data_copy.sort();
         println!("sort time 2 : {}", sort_time_2.elapsed().as_micros());
